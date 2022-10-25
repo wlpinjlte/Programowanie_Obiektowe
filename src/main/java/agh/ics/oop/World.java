@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import static agh.ics.oop.MoveDirection.FORWARD;
+import static agh.ics.oop.MoveDirection.RIGHT;
 import static java.lang.System.out;
 
 public class World {
@@ -31,9 +33,17 @@ public class World {
 
     public static void main(String[] args) {
         MoveDirection[] tab= new MoveDirection[args.length];
+        Animal animal = new Animal();
+
         World.start();
+        out.println(animal.toString());
         World.changeToDirect(tab,args);
         World.run(tab);
+        MoveDirection [] moves=OptionsParser.parse(args);
+        for(MoveDirection move:moves){
+            animal.move(move);
+        }
+        out.println(animal.toString());
         World.end();
     }
 }
