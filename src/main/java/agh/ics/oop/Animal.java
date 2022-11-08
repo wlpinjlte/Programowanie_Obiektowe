@@ -2,14 +2,40 @@ package agh.ics.oop;
 
 public class Animal {
     private MapDirection direction=MapDirection.NORTH;
-    private Vector2d position=new Vector2d(2,2);
+    private Vector2d position;
 
-    private final Vector2d endOfMap=new Vector2d(4,4);
+    private Vector2d previousPosition;
+    private IWorldMap map;
 
-    private final Vector2d startOfMap=new Vector2d(0,0);
+    public Vector2d getPosition() {
+        return position;
+    }
+
+    public Vector2d getPreviousPosition() {
+        return previousPosition;
+    }
+
+    public MapDirection getDirection(){
+        return direction;
+    }
+
+    public Animal(IWorldMap map) {
+        position=new Vector2d(2,2);
+        this.map = map;
+    }
+
+    public Animal(IWorldMap map, Vector2d initialPosition){
+        this.map=map;
+        position=initialPosition;
+    }
 
     public String toString(){
-        return "Position:"+position+" Direction:"+direction.toString();
+        return switch (direction){
+            case NORTH -> "N";
+            case WEST -> "W";
+            case SOUTH -> "S";
+            case EAST -> "E";
+        };
     }
 
     public boolean isAt(Vector2d position){
@@ -22,14 +48,18 @@ public class Animal {
            case RIGHT ->this.direction=this.direction.next();
            case FORWARD ->{
                Vector2d positonAfter=position.add(direction.toUnitVector());
-               if(positonAfter.follows(startOfMap)&&positonAfter.precedes(endOfMap)){
+               if(map.canMoveTo(positonAfter)){
+                   previousPosition=position;
                    position=positonAfter;
+                   map.place(this);
                }
            }
            case BACKWARD -> {
                Vector2d positonAfter=position.subtract(direction.toUnitVector());
-               if(positonAfter.follows(startOfMap)&&positonAfter.precedes(endOfMap)){
+               if(map.canMoveTo(positonAfter)){
+                   previousPosition=position;
                    position=positonAfter;
+                   map.place(this);
                }
            }
        }

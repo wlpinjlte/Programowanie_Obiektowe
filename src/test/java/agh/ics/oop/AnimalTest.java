@@ -8,22 +8,27 @@ class AnimalTest {
     @Test
     void testToString(){
         //given
-        Animal animal1 = new Animal();
-        Animal animal2 = new Animal();
+        RectangularMap map=new RectangularMap(5,5);
+        Animal animal1 = new Animal(map);
+        Animal animal2 = new Animal(map);
+        Animal animal3 = new Animal(map);
+        Animal animal4 = new Animal(map);
         //result
-        animal2.move(MoveDirection.FORWARD);
-        animal2.move(MoveDirection.FORWARD);
         animal2.move(MoveDirection.RIGHT);
-        animal2.move(MoveDirection.BACKWARD);
+        animal3.move(MoveDirection.LEFT);
+        animal4.move(MoveDirection.LEFT);
+        animal4.move(MoveDirection.LEFT);
         //then
-        assertEquals(animal1.toString(),"Position:(2,2) Direction:Północ");
-        assertEquals(animal2.toString(),"Position:(1,4) Direction:Wschód");
+        assertEquals(animal1.toString(),"N");
+        assertEquals(animal2.toString(),"E");
+        assertEquals(animal3.toString(),"W");
+        assertEquals(animal4.toString(),"S");
     }
 
     @Test
     void testIsAtA(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //then
         assertTrue(animal.isAt(new Vector2d(2,2)));
         assertFalse(animal.isAt(new Vector2d(0,0)));
@@ -32,7 +37,7 @@ class AnimalTest {
     @Test
     void testIsAtB(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
@@ -43,7 +48,7 @@ class AnimalTest {
     @Test
     void testMoveA(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.FORWARD);
         //then
@@ -53,7 +58,7 @@ class AnimalTest {
     @Test
     void testMoveB(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.BACKWARD);
         //then
@@ -63,7 +68,7 @@ class AnimalTest {
     @Test
     void testMoveC(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.LEFT);
         //then
@@ -73,7 +78,7 @@ class AnimalTest {
     @Test
     void testMoveD(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.LEFT);
@@ -85,7 +90,7 @@ class AnimalTest {
     @Test
     void testMoveE(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.FORWARD);
         animal.move(MoveDirection.FORWARD);
@@ -98,7 +103,7 @@ class AnimalTest {
     @Test
     void testMoveF(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.BACKWARD);
         animal.move(MoveDirection.BACKWARD);
@@ -111,7 +116,7 @@ class AnimalTest {
     @Test
     void testMoveG(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.RIGHT);
         animal.move(MoveDirection.FORWARD);
@@ -124,7 +129,7 @@ class AnimalTest {
     @Test
     void testMoveH(){
         //given
-        Animal animal = new Animal();
+        Animal animal = new Animal(new RectangularMap(5,5),new Vector2d(2,2));
         //result
         animal.move(MoveDirection.LEFT);
         animal.move(MoveDirection.FORWARD);
