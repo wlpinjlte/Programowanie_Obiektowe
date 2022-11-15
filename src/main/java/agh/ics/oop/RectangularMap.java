@@ -2,8 +2,7 @@ package agh.ics.oop;
 
 import java.util.HashMap;
 
-public class RectangularMap implements IWorldMap{
-    private HashMap<Vector2d,Animal> map=new HashMap<>();
+public class RectangularMap extends AbstractWorldMap{
     private final Vector2d endOfMap;
 
     private final Vector2d startOfMap=new Vector2d(0,0);
@@ -29,18 +28,14 @@ public class RectangularMap implements IWorldMap{
         return true;
     }
 
+
     @Override
-    public boolean isOccupied(Vector2d position) {
-        return map.containsKey(position);
+    public Vector2d lowerLeftDraw() {
+        return startOfMap;
     }
 
     @Override
-    public Object objectAt(Vector2d position) {
-        return map.get(position);
-    }
-
-    public String toString(){
-        MapVisualiser mapVisualiser = new MapVisualiser(this);
-        return mapVisualiser.draw(startOfMap,endOfMap);
+    public Vector2d upperRightDraw() {
+        return endOfMap;
     }
 }
