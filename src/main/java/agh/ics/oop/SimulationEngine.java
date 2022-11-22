@@ -10,7 +10,7 @@ public class SimulationEngine implements IEngine{
 
     private final ArrayList<Animal> animals=new ArrayList<>();
 
-    public SimulationEngine(MoveDirection[] moves,IWorldMap map,Vector2d[] initialPositions){
+    public SimulationEngine(MoveDirection[] moves,IWorldMap map,Vector2d[] initialPositions) throws IllegalAccessException {
         this.moves=moves;
         this.map=map;
         for(Vector2d position:initialPositions){
@@ -18,7 +18,7 @@ public class SimulationEngine implements IEngine{
         }
     }
 
-    public Animal addAnimal(Vector2d vector2d){
+    public Animal addAnimal(Vector2d vector2d) throws IllegalAccessException {
         Animal animal = new Animal(map,vector2d);
         if(map.canMoveTo(vector2d)){
             map.place(animal);

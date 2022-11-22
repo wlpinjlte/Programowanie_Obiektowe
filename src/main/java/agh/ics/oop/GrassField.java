@@ -48,24 +48,22 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if(objectAt(animal.getPosition())instanceof Animal){
-            return false;
-        }
-        if (animal.getPreviousPosition() != null) {
-            map.remove(animal.getPreviousPosition());
-        }
-        if(objectAt(animal.getPosition())instanceof Grass){
+    public void place(Animal animal) throws IllegalAccessException {
+        super.place(animal);
+        map.put(animal.getPosition(),animal);
+    }
+
+    @Override
+    public void positionChange(Vector2d oldPosition, Vector2d newPosition){
+        if(objectAt(newPosition)instanceof Grass){
             ArrayList<Vector2d> availableFields=findingAvabileFields();
             Collections.shuffle(availableFields);
             if(availableFields.size()>0) {//adding only when space on the map
                 map.put(availableFields.get(0), new Grass(availableFields.get(0)));
             }
         }
-        map.put(animal.getPosition(),animal);
-        return true;
+        super.positionChange(oldPosition, newPosition);
     }
-
     @Override
     public Vector2d lowerLeftDraw(){
 

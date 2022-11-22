@@ -17,15 +17,12 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    public boolean place(Animal animal) {
-        if (!canMoveTo(animal.getPosition())){
-            return false;
+    public void place(Animal animal) throws IllegalAccessException {
+        if(!animal.getPosition().precedes(endOfMap)||!animal.getPosition().follows(startOfMap)){
+            throw new IllegalArgumentException("Object can not be placed on position: " + animal.getPosition() + ". It is outside the map!");
         }
-        if(animal.getPreviousPosition()!=null){
-            map.remove(animal.getPreviousPosition());
-        }
-        map.put(animal.getPosition(),animal);
-        return true;
+        super.place(animal);
+        map.put(animal.getPosition(), animal);
     }
 
 

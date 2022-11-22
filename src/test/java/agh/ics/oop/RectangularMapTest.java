@@ -2,9 +2,7 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RectangularMapTest {
     @Test
@@ -26,29 +24,40 @@ public class RectangularMapTest {
         //given
         RectangularMap rectangularMap = new RectangularMap(5,5);
 
-        //result
-        Vector2d result = new Vector2d(2, 2);
-        Vector2d outOfMap=new Vector2d(-1,-1);
-        rectangularMap.place(new Animal(rectangularMap,result));
 
-        //then
-        assertFalse(rectangularMap.canMoveTo(result));
-        assertFalse(rectangularMap.canMoveTo(outOfMap));
-        assertTrue(rectangularMap.canMoveTo(new Vector2d(0,0)));
+        try{
+            //result
+            Vector2d result = new Vector2d(2, 2);
+            Vector2d outOfMap=new Vector2d(-1,-1);
+            rectangularMap.place(new Animal(rectangularMap,result));
+            //then
+            assertFalse(rectangularMap.canMoveTo(result));
+            assertFalse(rectangularMap.canMoveTo(outOfMap));
+            assertTrue(rectangularMap.canMoveTo(new Vector2d(0,0)));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
     }
 
     @Test
     public void isOccupiedTest(){
         //given
         RectangularMap rectangularMap = new RectangularMap(5,5);
+        try{
+            //result
+            Vector2d result = new Vector2d(2, 2);
+            rectangularMap.place(new Animal(rectangularMap,result));
 
-        //result
-        Vector2d result = new Vector2d(2, 2);
-        rectangularMap.place(new Animal(rectangularMap,result));
+            //then
+            assertTrue(rectangularMap.isOccupied(result));
+            assertFalse(rectangularMap.isOccupied(new Vector2d(0,0)));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
-        //then
-        assertTrue(rectangularMap.isOccupied(result));
-        assertFalse(rectangularMap.isOccupied(new Vector2d(0,0)));
     }
 
     @Test
@@ -61,9 +70,9 @@ public class RectangularMapTest {
         Vector2d outOfMap=new Vector2d(-1,-1);
 
         //then
-        assertTrue(rectangularMap.place(new Animal(rectangularMap,positonToPlace)));
-        assertFalse(rectangularMap.place(new Animal(rectangularMap,positonToPlace)));
-        assertFalse(rectangularMap.place(new Animal(rectangularMap,outOfMap)));
+        assertDoesNotThrow(()->rectangularMap.place(new Animal(rectangularMap,positonToPlace)));
+        assertThrows(IllegalAccessException.class,()->rectangularMap.place(new Animal(rectangularMap,positonToPlace)));
+        assertThrows(IllegalArgumentException.class,()->rectangularMap.place(new Animal(rectangularMap,outOfMap)));
     }
 
     @Test
@@ -72,12 +81,16 @@ public class RectangularMapTest {
         RectangularMap rectangularMap = new RectangularMap(5,5);
         Vector2d postionToPlace = new Vector2d(2, 2);
         Animal animal=new Animal(rectangularMap,postionToPlace);
+        try{
+            //result
+            rectangularMap.place(animal);
 
-        //result
-        rectangularMap.place(animal);
+            //then
+            assertEquals(animal,rectangularMap.objectAt(postionToPlace));
+            assertEquals(null,rectangularMap.objectAt(new Vector2d(0,0)));
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
 
-        //then
-        assertEquals(animal,rectangularMap.objectAt(postionToPlace));
-        assertEquals(null,rectangularMap.objectAt(new Vector2d(0,0)));
     }
 }

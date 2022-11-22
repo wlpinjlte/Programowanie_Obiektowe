@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
     @Test
-     void testPrase(){
+     void testPraseA(){
         //given
-        MoveDirection[] directions = OptionsParser.parse(new String[]{"f", "forward", "b", "backward", "r", "right", "l", "left", "u", "unknown"});
+        MoveDirection[] directions = OptionsParser.parse(new String[]{"f", "forward", "b", "backward", "r", "right", "l", "left"});
 
         //result
         int lenght=8;
@@ -23,5 +23,14 @@ class OptionsParserTest {
         assertEquals(MoveDirection.RIGHT, directions[5]);
         assertEquals(MoveDirection.LEFT, directions[6]);
         assertEquals(MoveDirection.LEFT, directions[7]);
+    }
+
+    @Test
+    void testPraseB(){
+        //given
+        String []toPrase= new String[]{"f", "forward", "b", "backward", "r", "fdfddf"};
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(toPrase));
     }
 }
