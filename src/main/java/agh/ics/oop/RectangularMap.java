@@ -17,22 +17,17 @@ public class RectangularMap extends AbstractWorldMap{
     }
 
     @Override
-    public void place(Animal animal) throws IllegalAccessException {
+    public void place(AbstractWorldMapElement animal) throws IllegalAccessException {
         if(!animal.getPosition().precedes(endOfMap)||!animal.getPosition().follows(startOfMap)){
             throw new IllegalArgumentException("Object can not be placed on position: " + animal.getPosition() + ". It is outside the map!");
         }
         super.place(animal);
         map.put(animal.getPosition(), animal);
     }
-
-
-    @Override
-    public Vector2d lowerLeftDraw() {
+    public Vector2d lowerLeftDraw(){
         return startOfMap;
     }
-
-    @Override
-    public Vector2d upperRightDraw() {
+    public Vector2d upperRightDraw(){
         return endOfMap;
     }
 }

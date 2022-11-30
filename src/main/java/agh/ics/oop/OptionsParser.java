@@ -1,10 +1,12 @@
 package agh.ics.oop;
 
+import java.util.List;
+
 public class OptionsParser {
     private static final String[] posibleMoves={"f", "forward", "r", "right", "l", "left", "b", "backward"};
 
-    public static MoveDirection[] parse(String[] args){
-        MoveDirection[] moves=new MoveDirection[args.length];
+    public static MoveDirection[] parse(List<String> args){
+        MoveDirection[] moves=new MoveDirection[args.size()];
         int i=0;
         for(String move:args){
             switch(move){

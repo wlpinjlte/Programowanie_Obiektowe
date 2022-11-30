@@ -2,13 +2,16 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class OptionsParserTest {
     @Test
      void testPraseA(){
         //given
-        MoveDirection[] directions = OptionsParser.parse(new String[]{"f", "forward", "b", "backward", "r", "right", "l", "left"});
+        MoveDirection[] directions = OptionsParser.parse(Arrays.asList("f", "forward", "b", "backward", "r", "right", "l", "left"));
 
         //result
         int lenght=8;
@@ -28,7 +31,7 @@ class OptionsParserTest {
     @Test
     void testPraseB(){
         //given
-        String []toPrase= new String[]{"f", "forward", "b", "backward", "r", "fdfddf"};
+        List<String> toPrase= Arrays.asList("f", "forward", "b", "backward", "r", "fdfddf");
 
         //then
         assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(toPrase));

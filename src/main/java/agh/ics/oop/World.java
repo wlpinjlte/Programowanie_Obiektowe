@@ -1,22 +1,14 @@
 package agh.ics.oop;
 
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
 import static agh.ics.oop.MoveDirection.FORWARD;
 import static agh.ics.oop.MoveDirection.RIGHT;
 import static java.lang.System.out;
 
 public class World {
     public static void main(String[] args) {
-        try{
-            MoveDirection[] directions = new OptionsParser().parse(args);
-            GrassField map= new GrassField(10);
-            Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-            IEngine enegine = new SimulationEngine(directions, map, positions);
-            out.println(map.toString());
-            enegine.run();
-            out.println(map.toString());
-        }catch (IllegalAccessException ex) {
-            throw new RuntimeException(ex);
-        }
-
+        Application.launch(App.class, args);
     }
 }

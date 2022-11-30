@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Animal extends AbstractWorldMapElement{
     private MapDirection direction=MapDirection.NORTH;
 
-    private final ArrayList<IPositionChangeObserver> positionObservers = new ArrayList<>();
+
     private IWorldMap map;
 
     public MapDirection getDirection(){
@@ -56,18 +56,5 @@ public class Animal extends AbstractWorldMapElement{
        }
     }
 
-    public void addObserver(IPositionChangeObserver observer){
-        positionObservers.add(observer);
-    }
-
-    public void removeObserver(IPositionChangeObserver observer){
-        positionObservers.remove(observer);
-    }
-
-    private void positionChanged(Vector2d oldPosition,Vector2d newPosition){
-        for(IPositionChangeObserver observer:positionObservers){
-            observer.positionChange(oldPosition, newPosition);
-        }
-    }
 
 }

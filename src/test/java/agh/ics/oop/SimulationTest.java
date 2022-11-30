@@ -16,19 +16,17 @@ public class SimulationTest {
             Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
             IEngine enegine = new SimulationEngine(directions, map, positions);
 
-
             //result
             enegine.run();
             String result=map.toString();
-            String expectResult= " y\\x  0 1 2 3 4 5 6 7 8 9\n" +
-                    "  5: ---------------------\n" +
-                    "  4: | | | |N| | | | | | |\n" +
-                    "  3: | | | | | | | | | | |\n" +
-                    "  2: | | | | | | | | | | |\n" +
-                    "  1: | | | | | | | | | | |\n" +
-                    "  0: | | |S| | | | | | | |\n" +
-                    " -1: ---------------------\n";
-
+            String expectResult= " y\\x  2 3\n" +
+                    "  5: -----\n" +
+                    "  4: | |N|\n" +
+                    "  3: | | |\n" +
+                    "  2: | | |\n" +
+                    "  1: | | |\n" +
+                    "  0: |S| |\n" +
+                    " -1: -----";
             //then
             Assertions.assertLinesMatch(result.lines(),expectResult.lines());
         } catch (IllegalAccessException e) {
