@@ -31,6 +31,21 @@ public class Animal extends AbstractWorldMapElement{
         };
     }
 
+    @Override
+    public String getImageResource() {
+        return switch (direction){
+            case NORTH -> "src/main/resources/up.png";
+            case WEST -> "src/main/resources/left.png";
+            case SOUTH -> "src/main/resources/down.png";
+            case EAST -> "src/main/resources/right.png";
+        };
+    }
+
+    @Override
+    public String toGuiString() {
+        return "Z "+this.position.toString();
+    }
+
     public boolean isAt(Vector2d position){
         return position.equals(this.position);
     }
